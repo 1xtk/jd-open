@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-ARG JD_BASE_URL=https://hub.fastgit.org/1xtk/jd-Shell
+ARG JD_BASE_URL=https://hub.fastgit.org/1xtk/jd-open
 ARG JD_BASE_BRANCH=main
 ARG JD_SCRIPTS_URL=https://hub.fastgit.org/1xtk/JD-get.git
 ARG JD_SCRIPTS_BRANCH=main
