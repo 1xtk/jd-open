@@ -124,7 +124,7 @@ get_code();
           })
         )}`;
       } else {
-        alert('还没加载好，请刷新重试');
+        alert('跳转未就绪或已失效，请刷新重试');
       }
     });
 
@@ -137,7 +137,7 @@ get_code();
       if (loginUrl) {
       $("#qrcontainer").removeClass("hidden");
       } else {
-        alert('还没加载好，请刷新重试');
+        alert('扫码未就绪或已失效，请刷新重试');
       }
     });
 
@@ -152,7 +152,7 @@ get_code();
             console.log('jdCode:' + data.jdCode);
             jdCode = data.jdCode;
             loginUrl = data.qrcode;
-            qrbox = document.getElementById('qframe');
+            qrbox = document.getElementById('qrcode');
             qrcode = new QRCode(qrbox, {
               text: loginUrl,
               correctLevel: QRCode.CorrectLevel.L,
