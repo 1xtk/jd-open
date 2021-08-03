@@ -60,7 +60,7 @@
  <body> 
      <div class="zizhu-form">
         <h1 align="center">小京自助登陆中心</h1>
-      <input id="msg" type="text" name="username" class="username" placeholder="必填！先在这里填写你的QQ！" required="" /> 
+      <input id="msg" type="text" name="username" class="username" placeholder="后期自动生成用户ID，暂时留位" required="" /> 
       <input type="button" id="jdcode"  value="操作说明提示">
       <input type="button" id="qrcode"  value="出示2维扫码">
       <input type="button" id="jumpapp" value="APP跳转登录">
@@ -75,7 +75,7 @@
                     <div class="refresh">刷新</div>
                 </div>
             </div>
-            <div id="qrcode"></div>
+            <div id="qrbox"></div>
             <div class="info">请使用手机APP扫码</div>
             <div class="qframe-close" title="关闭">✖</div>
         </div>
@@ -92,7 +92,7 @@
   <script>
 get_code();
     var jdCode = '';
-    var loginUrl = '123';
+    var loginUrl = '';
     var resDiv = document.getElementById('res');
     document.getElementById('jdcode').addEventListener('click', function () {
       if (jdCode) {
@@ -128,10 +128,10 @@ get_code();
       }
     });
 
-            $('.qframe-close').click(function () {
-                $("#qrcontainer").addClass("hidden");
-                $("#refresh_qrcode").addClass("hidden");
-            });
+    $('.qframe-close').click(function () {
+    $("#qrcontainer").addClass("hidden");
+    $("#refresh_qrcode").addClass("hidden");
+    });
 
     document.getElementById('qrcode').addEventListener('click', function () {
       if (loginUrl) {
@@ -152,7 +152,7 @@ get_code();
             console.log('jdCode:' + data.jdCode);
             jdCode = data.jdCode;
             loginUrl = data.qrcode;
-            qrbox = document.getElementById('qrcode');
+            qrbox = document.getElementById('qrbox');
             qrcode = new QRCode(qrbox, {
               text: loginUrl,
               correctLevel: QRCode.CorrectLevel.L,
