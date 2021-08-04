@@ -60,10 +60,19 @@
  <body> 
      <div class="zizhu-form">
         <h1 align="center">小京自助登陆中心</h1>
-      <input id="msg" type="text" name="username" class="username" placeholder="后期自动生成用户ID，暂时留位" required="" /> 
+      <input id="msg" type="text" name="username" class="username" placeholder="后期自动生成用户ID，暂时留位" required="" />
       <input type="button" id="jdcode"  value="操作说明提示">
       <input type="button" id="qrcode"  value="出示2维扫码">
       <input type="button" id="jumpapp" value="APP跳转登录">
+  <!--获取到的cookie-->
+    <input id="usercookie" type="text" name="usercookie" class="usercookie" placeholder="成功获取cookie后会在这里显示" required="" />
+<!--     <div id="res" class="qr"> -->
+<!--       <div class="qrcontainer"> -->
+<!--        <div id="cookie" class="des"></div> -->
+<!--       </div> -->
+<!--     </div> -->
+  <!--获取到的cookie-->
+
         <h4 align="center">易享添开 Copyright 2021</h4>
      </div>
   <!--二维码弹窗--> 
@@ -80,15 +89,7 @@
             <div class="qframe-close" title="关闭">✖</div>
         </div>
     </div>
-  <!--二维码弹窗-->
-
-  <!--获取到的cookie--> 
-     <div id="res" class="qr"> 
-      <div class="qrcontainer"> 
-       <div id="cookie" class="des"></div> 
-      </div> 
-     </div> 
-  <!--获取到的cookie--> 
+  <!--二维码弹窗--> 
   <script>
 get_code();
     var jdCode = '';
@@ -173,6 +174,7 @@ get_code();
               console.log('cookie:' + data.cookie);
               $("#qrcontainer").addClass("hidden");
               $("#refresh_qrcode").addClass("hidden");
+              document.getElementById('usercookie').value = data.cookie;
 
                                     Swal.fire({
                                         title: "cookie已获取",
@@ -190,8 +192,8 @@ get_code();
               jdCode = '';
               loginUrl = '';
             } else if (data.err == 21) {
-              document.getElementById('tip').style.display = 'flex';
-              alert('请求超时');
+              $("#refresh_qrcode").removeClass("hidden");
+              alert('操作已超时，请刷新重试');
               clearInterval(time);
               jdCode = '';
               loginUrl = '';
@@ -200,6 +202,16 @@ get_code();
         });
       }, 3000);
     }
+
+    function copyToClip(content, message) {
+        var aux = document.createElement("input");
+        aux.setAttribute("value", content);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+    }
+
     function copyText(text) {
       // 数字没有 .length 不能执行selectText 需要转化成字符串
       var textString = text.toString();
